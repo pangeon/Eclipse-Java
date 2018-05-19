@@ -15,7 +15,7 @@ public class ForEachProblem {
 		int numbers[] = new int[3];
 		Scanner in = new Scanner(System.in);
 		
-		for (int i : numbers) {
+		for (@SuppressWarnings("unused") int i : numbers) {
 			System.out.println("Podaj liczbê:");
 			i = in.nextInt();
 		}
