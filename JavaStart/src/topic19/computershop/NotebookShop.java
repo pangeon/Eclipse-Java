@@ -2,11 +2,11 @@ package topic19.computershop;
 
 /*
  *     
-    NotebookShop - klasa z metod¹ main. Utwórz w niej co najmniej 5 laptopów i dodaj je do bazy sklepu. 
-    Co najmniej 2 komputery musz¹ byæ takie same. Dla powtarzaj¹cego siê egzemplarza sprawdŸ 
-    dzia³anie metody checkAvailability(), a na koñcu wyœwietl wszystkie notebooki dostêpne w sklepie
+    NotebookShop - klasa z metodÂ¹ main. UtwÃ³rz w niej co najmniej 5 laptopÃ³w i dodaj je do bazy sklepu. 
+    Co najmniej 2 komputery muszÂ¹ byÅ‚ takie same. Dla powtarzajÂ¹cego siÃª egzemplarza sprawdÅ¸ 
+    dziaÂ³anie metody checkAvailability(), a na koÃ±cu wyÅ“wietl wszystkie notebooki dostÃªpne w sklepie
 
-Ograniczenia: w sklepowym magazynie jest miejsce na maksymalnie 100 komputerów.
+Ograniczenia: w sklepowym magazynie jest miejsce na maksymalnie 100 komputerÃ³w.
 
  */
 
