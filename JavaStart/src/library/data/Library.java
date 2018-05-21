@@ -7,8 +7,7 @@ public class Library {
 	private Magazine[] magazines;
 	private int booksNumber;
 	private int magazinesNumber;
-	
-	
+		
 	public int getBooksNumber() {
 		return booksNumber;
 	}
@@ -25,7 +24,6 @@ public class Library {
 		books = new Book[MAX_BOOKS];
 		magazines = new Magazine[MAX_MAGAZINES];
 	}
-	
 	public void addBook(Book book) {
 		if(booksNumber < MAX_BOOKS) {
 			books[booksNumber] = book;
@@ -41,14 +39,13 @@ public class Library {
 		} else {
 			System.out.println("Maxymalna liczba magazynów zosta³a osi¹gniêta");
 		}
-		
 	}
 	public void printBooks() {
 		if(booksNumber == 0) {
 			System.out.println("Brak ksi¹¿ek w bibliotece");
 		}
 		for(int i=0; i<booksNumber; i++) {
-			books[i].print();
+			System.out.println(books[i]);
 		}
 	}
 	public void printMagazines() {
@@ -56,7 +53,7 @@ public class Library {
 			System.out.println("Brak magazynów w bibliotece");
 		}
 		for (int i=0; i<magazinesNumber; i++) {
-			magazines[i].print();
+			System.out.println(magazines[i]);	
 		}
 	}
 }

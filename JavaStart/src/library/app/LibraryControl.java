@@ -6,12 +6,6 @@ import library.data.Magazine;
 import library.utils.DataReader;
 
 public class LibraryControl {
-	// zmienne do kontrolowania programu
-	public static final int EXIT = 0;
-	public static final int ADD_BOOK = 1;
-	public static final int ADD_MAGAZINE = 2;
-	public static final int PRINT_BOOKS = 3;
-	public static final int PRINT_MAGAZINES = 4;
 	
 	// zmienna do komunikacji z u¿ytkownikiem
 	private DataReader dataReader;
@@ -28,10 +22,10 @@ public class LibraryControl {
 	 * G³ówna pêtla programu, która pozwala na wybór opcji i interakcjê
 	 */
 	public void controlLoop() {
-		int option;
+		Option optionEnum;
 		printOptions();
-		while((option = dataReader.getInt()) != EXIT) {
-			switch(option) {
+		while((optionEnum = Option.createFromInt(dataReader.getInt())) != Option.EXIT) {
+			switch(optionEnum) {
 			case ADD_BOOK:
 				addBook();
 				break;
@@ -55,11 +49,9 @@ public class LibraryControl {
 	}
 	private void printOptions() {
 		System.out.println("Wybierz opcjê: ");
-		System.out.println(EXIT + " - wyjœcie z programu");
-		System.out.println(ADD_BOOK + " - dodanie nowej ksi¹¿ki");
-		System.out.println(ADD_MAGAZINE + " - dodanie nowego magazynu");
-		System.out.println(PRINT_BOOKS + " - wyœwietl dostêpne ksi¹¿ki");
-		System.out.println(PRINT_MAGAZINES + " - wyœwietl dostêpne magazyny");
+		for (Option i_optionEnum : Option.values()) {
+			System.out.println(i_optionEnum);
+		}
 	}
 	private void addBook() {
 		Book book = dataReader.readAndCreateBook();
