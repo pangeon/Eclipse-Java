@@ -29,7 +29,7 @@ class Calculate {
 			double div = x / y;
 			return div;
 		} else {
-			System.out.println("B³¹d, nie mo¿na dzieliæ przez zero !");
+			System.out.println("BÅ‚Ä…d, nie moÅ¼na dzieliÄ‡ przez zero !");
 			return 0;
 		}
 	}
@@ -39,6 +39,6 @@ class Calculate {
 		double b = c.subtract(x, y);
 		double e = c.multiply(x, y);
 		double f = c.divide(x, y);
-		System.out.println("Dodawanie: " + a + "\n Odejmowanie " + b + "\n Mno¿enie: " + e + "\n Dzielenie: " + f);
+		System.out.println("Dodawanie: " + a + "\n Odejmowanie " + b + "\n MnoÅ¼enie: " + e + "\n Dzielenie: " + f);
 	}
 }
