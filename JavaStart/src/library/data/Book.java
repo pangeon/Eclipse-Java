@@ -32,7 +32,20 @@ public class Book extends Publication {
 	}
 	@Override
 	public String toString() {
-		return getTitle()+";"+getAuthor()+";"+getYear()+";"+getPublisher()+";"+getPages()+";"+getIsbn();
+		StringBuilder print = new StringBuilder(32);
+		print.append(getTitle());
+		print.append(";");
+		print.append(getAuthor());
+		print.append(";");
+		print.append(getYear());
+		print.append(";");
+		print.append(getPublisher());
+		print.append(";");
+		print.append(getPages());
+		print.append(";");
+		print.append(getIsbn());
+		print.append(";");
+		return print.toString();
 	}
 	@Override
 	public int hashCode() {

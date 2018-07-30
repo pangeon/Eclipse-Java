@@ -7,10 +7,10 @@ import library.utils.DataReader;
 
 public class LibraryControl {
 	
-	// zmienna do komunikacji z u¿ytkownikiem
+	// zmienna do komunikacji z uï¿½ytkownikiem
 	private DataReader dataReader;
 	
-	// "biblioteka" przechowuj¹ca dane
+	// "biblioteka" przechowujï¿½ca dane
 	private Library library;
 	
 	public LibraryControl() {
@@ -19,7 +19,7 @@ public class LibraryControl {
 	}
 	
 	/*
-	 * G³ówna pêtla programu, która pozwala na wybór opcji i interakcjê
+	 * Gï¿½ï¿½wna pï¿½tla programu, ktï¿½ra pozwala na wybï¿½r opcji i interakcjï¿½
 	 */
 	public void controlLoop() {
 		Option optionEnum;
@@ -39,16 +39,16 @@ public class LibraryControl {
 				printMagazines();
 				break;
 			default:
-				System.out.println("Nie ma takiej opcji, wprowadŸ ponownie: ");
+				System.out.println("Nie ma takiej opcji, wprowadÅº ponownie: ");
 			}
 			printOptions();	
 		}
-		// zamykamy strumieñ wejœcia
+		// zamykamy strumieï¿½ wejï¿½cia
 		dataReader.close();
 		
 	}
 	private void printOptions() {
-		System.out.println("Wybierz opcjê: ");
+		System.out.println("Wybierz opcji: ");
 		for (Option i_optionEnum : Option.values()) {
 			System.out.println(i_optionEnum);
 		}

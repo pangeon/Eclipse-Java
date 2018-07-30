@@ -29,7 +29,7 @@ public class Library {
 			books[booksNumber] = book;
 			booksNumber++;
 		} else {
-			System.out.println("Maxymalna liczba ksi¹¿ek zosta³a osi¹gniêta");
+			System.out.println("Maxymalna liczba ksiÄ…Å¼ek zostaÅ‚a osiÄ…gniÄ™ta");
 		}
 	}
 	public void addMagazine(Magazine magazine) {
@@ -37,12 +37,12 @@ public class Library {
 			magazines[magazinesNumber] = magazine;
 			magazinesNumber++;
 		} else {
-			System.out.println("Maxymalna liczba magazynów zosta³a osi¹gniêta");
+			System.out.println("Maxymalna liczba magazynï¿½w zostaï¿½a osiï¿½gniï¿½ta");
 		}
 	}
 	public void printBooks() {
 		if(booksNumber == 0) {
-			System.out.println("Brak ksi¹¿ek w bibliotece");
+			System.out.println("Brak ksiï¿½ï¿½ek w bibliotece");
 		}
 		for(int i=0; i<booksNumber; i++) {
 			System.out.println(books[i]);
@@ -50,7 +50,7 @@ public class Library {
 	}
 	public void printMagazines() {
 		if(magazinesNumber == 0) {
-			System.out.println("Brak magazynów w bibliotece");
+			System.out.println("Brak magazynï¿½w w bibliotece");
 		}
 		for (int i=0; i<magazinesNumber; i++) {
 			System.out.println(magazines[i]);	
