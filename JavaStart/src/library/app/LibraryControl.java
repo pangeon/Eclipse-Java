@@ -1,16 +1,20 @@
 package library.app;
 
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
 import library.data.Book;
 import library.data.Library;
 import library.data.Magazine;
 import library.utils.DataReader;
+import library.utils.LibraryUtils;
 
 public class LibraryControl {
 	
-	// zmienna do komunikacji z u�ytkownikiem
+	// zmienna do komunikacji z użytkownikiem
 	private DataReader dataReader;
 	
-	// "biblioteka" przechowuj�ca dane
+	// "biblioteka" przechowująca dane
 	private Library library;
 	
 	public LibraryControl() {
@@ -19,33 +23,41 @@ public class LibraryControl {
 	}
 	
 	/*
-	 * G��wna p�tla programu, kt�ra pozwala na wyb�r opcji i interakcj�
+	 * Główna pętla programu, która pozwala na wybór opcji i interakcji
 	 */
 	public void controlLoop() {
-		Option optionEnum;
-		printOptions();
-		while((optionEnum = Option.createFromInt(dataReader.getInt())) != Option.EXIT) {
-			switch(optionEnum) {
-			case ADD_BOOK:
-				addBook();
-				break;
-			case ADD_MAGAZINE:
-				addMagazine();
-				break;
-			case PRINT_BOOKS:
-				printBooks();
-				break;
-			case PRINT_MAGAZINES:
-				printMagazines();
-				break;
-			default:
+		Option option = null;
+				
+		while(option != Option.EXIT) {
+			try {
+				printOptions();
+				option = Option.createFromInt(dataReader.getInt());
+				
+				switch(option) {
+				case ADD_BOOK:
+					addBook();
+					break;
+				case ADD_MAGAZINE:
+					addMagazine();
+					break;
+				case PRINT_BOOKS:
+					printBooks();
+					break;
+				case PRINT_MAGAZINES:
+					printMagazines();
+					break;
+				case EXIT:
+					;
+				}
+			} catch(InputMismatchException e) {
+				System.out.println("Wprowadzono niepoprawne dane, publikacji nie dodano");
+			} catch(NumberFormatException | NoSuchElementException e) {
 				System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
 			}
-			printOptions();	
+
 		}
-		// zamykamy strumie� wej�cia
+		// zamykamy strumień wejścia
 		dataReader.close();
-		
 	}
 	private void printOptions() {
 		System.out.println("Wybierz opcji: ");
@@ -63,9 +75,9 @@ public class LibraryControl {
 	}
 
 	private void printBooks() {
-		library.printBooks();
+		LibraryUtils.printBooks(library);
 	}
 	private void printMagazines() {
-		library.printMagazines();
+		LibraryUtils.printMagazines(library);
 	}
 }

@@ -1,59 +1,41 @@
 package library.data;
 
 public class Library {
-	public static final int MAX_BOOKS = 1000;
-	public static final int MAX_MAGAZINES = 1000;
-	private Book[] books;
-	private Magazine[] magazines;
-	private int booksNumber;
-	private int magazinesNumber;
-		
-	public int getBooksNumber() {
-		return booksNumber;
+	public static final int MAX_PUBLICATIONS = 2000;
+	private Publication[] publications;
+
+	private int publicationsNumber;
+
+	public int getPublicationsNumber() {
+		return publicationsNumber;
 	}
-	public Book[] getBooks() {
-		return books;
-	}
-	public int getMagazinesNumber() {
-		return magazinesNumber;
-	}
-	public Magazine[] getMagazine() {
-		return magazines;
+	public Publication[] getPublications() {
+		return publications;
 	}
 	public Library() {
-		books = new Book[MAX_BOOKS];
-		magazines = new Magazine[MAX_MAGAZINES];
+		publications = new Publication[MAX_PUBLICATIONS];
 	}
 	public void addBook(Book book) {
-		if(booksNumber < MAX_BOOKS) {
-			books[booksNumber] = book;
-			booksNumber++;
-		} else {
-			System.out.println("Maxymalna liczba książek została osiągnięta");
-		}
+		addPublication(book);
 	}
 	public void addMagazine(Magazine magazine) {
-		if(magazinesNumber < MAX_MAGAZINES) {
-			magazines[magazinesNumber] = magazine;
-			magazinesNumber++;
-		} else {
-			System.out.println("Maxymalna liczba magazyn�w zosta�a osi�gni�ta");
-		}
+		addPublication(magazine);
 	}
-	public void printBooks() {
-		if(booksNumber == 0) {
-			System.out.println("Brak ksi��ek w bibliotece");
+	private void addPublication(Publication pub) throws ArrayIndexOutOfBoundsException {
+		if(publicationsNumber == MAX_PUBLICATIONS) {
+			throw new ArrayIndexOutOfBoundsException("MAX PUBLICATIONS: " + MAX_PUBLICATIONS);
 		}
-		for(int i=0; i<booksNumber; i++) {
-			System.out.println(books[i]);
-		}
+		publications[publicationsNumber] = pub;
+		publicationsNumber++;
 	}
-	public void printMagazines() {
-		if(magazinesNumber == 0) {
-			System.out.println("Brak magazyn�w w bibliotece");
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < publicationsNumber; i++) {
+			builder.append(publications[i]);
+			builder.append("\n");
 		}
-		for (int i=0; i<magazinesNumber; i++) {
-			System.out.println(magazines[i]);	
-		}
+		return builder.toString();
 	}
+	
 }

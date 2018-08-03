@@ -1,5 +1,7 @@
 package library.app;
 
+import java.util.NoSuchElementException;
+
 public enum Option {
 	EXIT(0, "Wyjście z programu"),
 	ADD_BOOK(1, "Dodanie książki"),
@@ -24,12 +26,19 @@ public enum Option {
 	public String toString() {
 		return value + "-" + description;
 	}
-	 /* Metoda createFromInt(int option), kt�ra pozwala przekszta�ci� warto�� typu int na odpowiedni� 
-	 * warto�� typu Option. Wykorzystujemy tutaj metod� values(), kt�ra zwraca tablic� wszystkich 
-	 * warto�ci, a poniewa� kolejne elementy numerujemy od 0, to zwracamy po prostu odpowiedni 
+	 /* Metoda createFromInt(int option), która pozwala przekształcić wartość typu int na odpowiednią 
+	 * wartość typu Option. Wykorzystujemy tutaj metodą values(), która zwraca tablicę wszystkich 
+	 * wartości, a ponieważ kolejne elementy numerujemy od 0, to zwracamy po prostu odpowiedni 
 	 * element tej tablicy. */
-	public static Option createFromInt(int option) {
-		return Option.values()[option];
+	public static Option createFromInt(int option) throws NoSuchElementException {
+		Option result = null;
+		try {
+			result = Option.values()[option];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new NoSuchElementException("Brak elementu o wskazanym ID");
+		}
+		return result;
+		
 	}
 	
 	
