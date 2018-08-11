@@ -1,17 +1,23 @@
 package topic26.files.exercise;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Employee[] employeeGroup;
 	
+	public Employee[] getEmployeeGroup() {
+		return employeeGroup;
+	}
+	
 	public Company(int membersAmount) {
-		this.employeeGroup = new Employee[membersAmount];
+		employeeGroup = new Employee[membersAmount];
 	}
-	public Employee getEmployee(int member) {
-		return employeeGroup[member];
-	}
-	public void setEmployeeGroup(int member, String name, String surname, double salary) {
-		Employee worker = getEmployee(member);
-		worker = new Employee(name, surname, salary);
+
+	public void addWorker(Employee worker, int mumMember) {
+		employeeGroup[mumMember] = worker;
 	}
 	
 	

@@ -15,4 +15,8 @@ public class Employee extends Person {
 		super(name, surname);
 		setSalary(salary);
 	}
+	@Override
+	public String toString() {
+		return super.toString() + ", wypłata " + getSalary();
+	}
 }

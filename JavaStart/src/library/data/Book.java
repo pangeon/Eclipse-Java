@@ -1,6 +1,9 @@
 package library.data;
 
 public class Book extends Publication {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String author;
 	private int pages;
 	private String isbn;

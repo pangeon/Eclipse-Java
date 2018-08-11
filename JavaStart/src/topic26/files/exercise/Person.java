@@ -25,4 +25,8 @@ public class Person implements Serializable {
 		setName(name);
 		setSurname(surname);
 	}
+	@Override
+	public String toString() {
+		return getName() + " " + getSurname();
+	}
 }
