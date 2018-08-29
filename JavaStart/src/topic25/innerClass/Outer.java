@@ -21,7 +21,8 @@ public class Outer {
 	    final String finalVariable = "final variable";
 	    String effectivelyFinalVariable = "effectively final variable";
 	    // użycie zmiennej nonFinalVariable nie jest dozwolone ponieważ jej wartość jest zmieniana.
-	    String nonFinalVariable = "non final variable";
+	    @SuppressWarnings("unused")
+		String nonFinalVariable = "non final variable";
 	 
 	    class InnerClass {         
 	        public void saySomething() {        

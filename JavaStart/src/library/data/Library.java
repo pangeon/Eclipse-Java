@@ -1,12 +1,14 @@
 package library.data;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Library implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final int MAX_PUBLICATIONS = 2000;
+	public static final int INITIAL_CAPACITY = 1;
 	private Publication[] publications;
 
 	private int publicationsNumber;
@@ -18,7 +20,7 @@ public class Library implements Serializable {
 		return publications;
 	}
 	public Library() {
-		publications = new Publication[MAX_PUBLICATIONS];
+		publications = new Publication[INITIAL_CAPACITY];
 	}
 	public void addBook(Book book) {
 		addPublication(book);
@@ -27,12 +29,40 @@ public class Library implements Serializable {
 		addPublication(magazine);
 	}
 	private void addPublication(Publication pub) throws ArrayIndexOutOfBoundsException {
-		if(publicationsNumber == MAX_PUBLICATIONS) {
-			throw new ArrayIndexOutOfBoundsException("MAX PUBLICATIONS: " + MAX_PUBLICATIONS);
+		if(publicationsNumber == publications.length) {
+			publications = Arrays.copyOf(publications, publications.length*2);
 		}
 		publications[publicationsNumber] = pub;
 		publicationsNumber++;
 	}
+	@SuppressWarnings("unused")
+	private void removePublication(Publication pub) {
+		if(pub == null) {
+			return;
+		}
+		final int NOT_FOUND = -1;
+		int found = 0;
+		int i = 0;
+		
+		while(i < publications.length && found == NOT_FOUND) {
+			if(pub.equals(publications[i])) {
+				found = i;
+			}
+			else {
+				i++;
+			}
+		}
+		if(found != NOT_FOUND) {
+			System.arraycopy(
+					publications, 
+					found + 1, 
+					publications, 
+					found, 
+					publications.length - found - 1);
+			publicationsNumber--;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -41,6 +71,40 @@ public class Library implements Serializable {
 			builder.append("\n");
 		}
 		return builder.toString();
+	}
+	public static class AlphabeticalComparator implements Comparator<Publication> {
+
+		@Override
+		public int compare(Publication o1, Publication o2) {
+			if(o1 == null && o2 == null) {
+				return 0;
+			}
+			if (o1 == null) {
+				return 1;
+			}
+			if (o2 == null) {
+				return -1;
+			}
+			return o1.getTitle().compareTo(o2.getTitle());
+		}
+	}
+	public static class DateComparator implements Comparator<Publication> {
+
+		@Override
+		public int compare(Publication o1, Publication o2) {
+			if(o1 == null && o2 == null) {
+				return 0;
+			}
+			if (o1 == null) {
+				return 1;
+			}
+			if (o2 == null) {
+				return -1;
+			}
+			Integer i1 = o1.getYear();
+			Integer i2 = o2.getYear();
+			return -i1.compareTo(i2);
+		}
 	}
 	
 }
