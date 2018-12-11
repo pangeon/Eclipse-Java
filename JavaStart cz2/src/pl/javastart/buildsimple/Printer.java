@@ -1,8 +1,13 @@
 package pl.javastart.buildsimple;
 
+import java.util.function.Consumer;
+
 public class Printer {
     public static void print(Object o) {
         System.out.print(o);
+    }
+    public static <T> void print(T o, Consumer<T> cons) {
+        cons.accept(o);
     }
     public static void print(String s) {
         System.out.print(s);
@@ -31,4 +36,8 @@ public class Printer {
     public static void err(Object o) {
         System.err.println(o);
     }
+
+    /*public static void main(String[] args) {
+        print(new String("Test"), x -> System.out.println(x));
+    }*/
 }
