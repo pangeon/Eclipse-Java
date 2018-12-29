@@ -18,10 +18,10 @@ class Dziekanat {
         private List<Integer> czastkoweStopnie; // null
         private String wykladowca; // null
 
-        Oceny(String wykladowca, int... args) {
-            czastkoweStopnie = new ArrayList<>();
-            for (int arg : args) {
-                czastkoweStopnie.add(arg);
+        Oceny(String wykladowca, int... czastkoweStopnie) {
+            this.czastkoweStopnie = new ArrayList<>();
+            for (int pojedynczyStopien : czastkoweStopnie) {
+                this.czastkoweStopnie.add(pojedynczyStopien);
             }
             this.wykladowca = wykladowca;
         }

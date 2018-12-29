@@ -1,61 +1,81 @@
 package pl.javastart.library.utils;
 
-import java.util.*;
+import pl.javastart.library.data.Book;
+import pl.javastart.library.data.Library;
+import pl.javastart.library.data.Magazine;
 
-import pl.javastart.library.data.*;
+/**
+ - lib.getPublications().values().stream() - zwraca strumień utworzony na podstawie zbioru wartości zwróconego przez
+ metodę values() mapy publikacji z klasy Library.
+
+ - isInstance() klasy Class. Jest to klasa, która pozwala pozwala uzyskać informację o klasie (nie obiekcie klasy),
+ czyli np. ile dana klasa ma metod, konstruktorów, jaka jest jej nazwy itp. Metoda isInstance() sprawdza, czy
+ obiekt przekazany jako argument jest obiektem tej klasy.
+
+ Dwa poniższe zapisy są sobie równoważne:
+ ----------------------------------------
+ .filter(Magazine.class::isInstance)
+ .filter(x -> x instanceof Magazine)
+ - Strumień chcemy posortować, a można to zrobić wywołując na nim metodę sorted(new Library.AlphabeticalComparator()).
+ Jej argumentem może być obiekt komparatora lub funkcja dwuargumentowa (BiFunction), która porówna ze sobą dwa argumenty.
+
+ Drugiego sposobu użyliśmy przy porównywaniu użytkowników według nazwisk wywołując:
+ .sorted((a, b) -> a.getLastName().compareTo(b.getLastName())).
+
+ */
 
 public class LibraryUtils {
-	
+
+	/*
+	Problem powtarzalności kodu nadal jednak występuje między metodami printBooks() i printMagazines() - wydzielmy jedną
+	prywatną metodę printPublications(), która będzie bardziej uniwersalna i wywołujmy ją z dwóch wcześniej wymienionych
+	metod z odpowiednimi parametrami.
+	 */
+
+	/*
+	stara wersja kodu
+	-------------------
 	public static void printBooks(Library lib) {
-		List<Publication> publications = new ArrayList();
-		publications.addAll(lib.getPublications().values());
+		long countBooks = lib.getPublications().values().stream().filter(Book.class::isInstance)
+				.sorted(new Library.AlphabeticalComparator()).peek(System.out::println).count();
 
-		Collections.sort(publications, new Library.AlphabeticalComparator());
-
-		int countBooks = 0;
-		for(Publication p: publications) {
-			if(p instanceof Book) {
-				System.out.println(p);
-				countBooks++;
-			}
-		}
-		
 		if(countBooks == 0) {
-			System.out.println("Brak książek w bibliotece");
+			System.out.println("Brak książek w bibliotece.");
 		}
 	}
-	
+
 	public static void printMagazines(Library lib) {
-		List<Publication> publications = new ArrayList<>();
-		publications.addAll(lib.getPublications().values());
+		long countMagazines = lib.getPublications().values().stream()
+				.filter(Magazine.class::isInstance).sorted(new Library.AlphabeticalComparator())
+				.peek(System.out::println).count();
 
-		Collections.sort(publications, new Library.AlphabeticalComparator());
-
-		int countMagazines = 0;
-		for(Publication p: publications) {
-			if(p instanceof Magazine) {
-				System.out.println(p);
-				countMagazines++;
-			}
-		}
-		
 		if(countMagazines == 0) {
 			System.out.println("Brak magazynów w bibliotece");
 		}
 	}
-	public static void printUsers(Library lib) {
-		List<LibraryUser> users = new ArrayList<>();
-		users.addAll(lib.getUsers().values());
+	*/
 
-		Collections.sort(users, new Comparator<LibraryUser>() {
-			@Override
-			public int compare(LibraryUser o1, LibraryUser o2) {
-				return 0;
-			}
-		});
+	//nowa wersja kodu
+	public static void printBooks(Library lib) {
+		printPublications(lib, Book.class);
+	}
+	public static void printMagazines(Library lib) {
+		printPublications(lib, Magazine.class);
+	}
+	private static void printPublications(Library lib, Class cl) {
+		long countPublications = lib.getPublications().values().stream()
+				.filter(cl::isInstance).sorted(new Library.AlphabeticalComparator())
+				.peek(System.out::println).count();
 
-		for(LibraryUser u:users) {
-			System.out.println(u);
+		if(countPublications == 0) {
+			System.out.println("W bibliotece nie znaleziono publikacji typu: " + cl.getSimpleName());
 		}
+	}
+
+
+	public static void printUsers(Library lib) {
+		lib.getUsers().values().stream()
+				.sorted((o1, o2) -> o1.getLastName().compareTo(o2.getFirstName()))
+				.forEach(System.out::println);
 	}
 }
